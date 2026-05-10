@@ -1,0 +1,67 @@
+MIT License
+
+Copyright (c) 2026 Ethicsware (Edward Arven)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+───────────────────────────────────────────────────────────────────────────────
+ETHICS SPY — ADDITIONAL USAGE TERMS
+Ethicsware (Edward Arven) — 2026
+───────────────────────────────────────────────────────────────────────────────
+
+1. PERMITTED USE
+   This software is intended exclusively for:
+   - Legal OSINT (Open Source Intelligence) research
+   - Cybersecurity education and awareness
+   - Personal data exposure assessment (self-investigation)
+   - Ethical security research conducted with proper authorization
+
+2. PROHIBITED USE
+   The following uses are strictly forbidden:
+   - Stalking, harassment, or surveillance of individuals without consent
+   - Unauthorized data collection targeting private individuals
+   - Use in conjunction with illegal activities under any jurisdiction
+   - Selling or monetizing data obtained through this tool
+   - Bypassing authentication systems or accessing private accounts
+   - Any use that violates applicable privacy laws (GDPR, KVKK, CCPA, etc.)
+
+3. DISCLAIMER
+   This tool queries only publicly available APIs and open data sources.
+   It does not attempt to access, breach, or exploit any private system.
+   The author assumes no responsibility for misuse of this software.
+   Users are solely responsible for compliance with local laws.
+
+4. DATA SOURCES
+   All data is retrieved from publicly accessible APIs including but not
+   limited to: GitHub API, Chess.com API, Lichess API, Reddit API,
+   ip-api.com, crt.sh, XposedOrNot, and similar open services.
+   No proprietary or restricted data sources are used.
+
+5. ATTRIBUTION
+   If you redistribute or modify this software, you must:
+   - Retain this license file in full
+   - Clearly credit "Ethicsware (Edward Arven)" as the original author
+   - Not imply endorsement by the original author
+
+───────────────────────────────────────────────────────────────────────────────
+"With knowledge comes responsibility."
+                                        — Ethicsware
+───────────────────────────────────────────────────────────────────────────────
+
+bu nedir
