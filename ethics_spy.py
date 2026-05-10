@@ -57,8 +57,6 @@ MG  = "\033[38;5;141m"
 GY  = "\033[38;5;245m"
 BLD = "\033[1m"
 
-ACCESS_TOKEN = "@@root-edward"
-
 NOT_FOUND_HINTS = [
     "page not found","user not found","does not exist","no user",
     "account suspended","404 not found","profile not found",
@@ -404,20 +402,6 @@ def print_banner():
     print(f"\n{MG}{BLD}")
     for ln in BANNER_LINES: print(ln)
     print(R)
-
-def login_screen():
-    while True:
-        clear()
-        print_banner()
-        sep()
-        print(f"  {GY}=== Ethics Anti Extortion - Multipurpose Tool ==={R}")
-        sep()
-        print()
-        token = getpass_star(f"  {W}Access Token:{R}      ")
-        if token == ACCESS_TOKEN:
-            return
-        print(f"\n  {RD}[!] Invalid token.{R}")
-        time.sleep(1.2)
 
 def main_menu():
     clear()
@@ -1874,7 +1858,6 @@ def main():
         try: os.system("chcp 65001 > nul")
         except Exception: pass
 
-    login_screen()
 
     while True:
         choice = main_menu()
