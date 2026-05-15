@@ -61,59 +61,118 @@ NOT_FOUND_HINTS = [
     "page not found","user not found","does not exist","no user",
     "account suspended","404 not found","profile not found",
     "sorry, this page","this account doesn't exist",
+    "the specified profile could not be found",
+    "this page isn't available","couldn't find this page",
+    "could not be found","no results found",
 ]
 
+# ---------------------------------------------------------------------------
+#  PLATFORMS — API-verified > HTTP-checked > Manual (only when legally needed)
+# ---------------------------------------------------------------------------
 PLATFORMS = {
-    "Chess.com":   {"url":"https://api.chess.com/pub/player/{u}",
-                    "type":"api","profile":"https://www.chess.com/member/{u}"},
-    "Lichess":     {"url":"https://lichess.org/api/user/{u}",
-                    "type":"api","profile":"https://lichess.org/@/{u}"},
+    # --- API-verified platforms ---
+    "GitHub":      {"url":"https://api.github.com/users/{u}",
+                    "type":"api","profile":"https://github.com/{u}"},
     "Reddit":      {"url":"https://www.reddit.com/user/{u}/about.json",
                     "type":"api","profile":"https://www.reddit.com/user/{u}",
                     "headers":{"User-Agent":"EPC-OSINT/1.0"}},
-    "GitHub":      {"url":"https://api.github.com/users/{u}",
-                    "type":"api","profile":"https://github.com/{u}"},
-    "GitLab":      {"url":"https://gitlab.com/api/v4/users?username={u}",
-                    "type":"api_list","profile":"https://gitlab.com/{u}"},
-    "PyPI":        {"url":"https://pypi.org/pypi/{u}/json",
-                    "type":"api","profile":"https://pypi.org/user/{u}"},
-    "HackerNews":  {"url":"https://hacker-news.firebaseio.com/v0/user/{u}.json",
-                    "type":"api","profile":"https://news.ycombinator.com/user?id={u}"},
     "Duolingo":    {"url":"https://www.duolingo.com/2017-06-30/users?username={u}",
                     "type":"api","profile":"https://www.duolingo.com/profile/{u}"},
-    "Dev.to":      {"url":"https://dev.to/api/users/by_username?url={u}",
-                    "type":"api","profile":"https://dev.to/{u}"},
-    "npm":         {"url":"https://registry.npmjs.org/-/user/org.couchdb.user:{u}",
-                    "type":"api","profile":"https://www.npmjs.com/~{u}"},
     "Gravatar":    {"url":"https://en.gravatar.com/{u}.json",
                     "type":"api","profile":"https://en.gravatar.com/{u}"},
-    "Keybase":     {"url":"https://keybase.io/_/api/1.0/user/lookup.json?username={u}",
-                    "type":"api","profile":"https://keybase.io/{u}"},
-    "Bitbucket":   {"url":"https://api.bitbucket.org/2.0/users/{u}",
-                    "type":"api","profile":"https://bitbucket.org/{u}"},
-    "TryHackMe":   {"url":"https://tryhackme.com/api/user/exist/{u}",
-                    "type":"api","profile":"https://tryhackme.com/p/{u}"},
-    "ProductHunt": {"url":"https://www.producthunt.com/@{u}",
-                    "type":"http","profile":"https://www.producthunt.com/@{u}"},
+    "Mastodon":    {"url":"https://mastodon.social/api/v1/accounts/lookup?acct={u}",
+                    "type":"api","profile":"https://mastodon.social/@{u}"},
+    "Bluesky":     {"url":"https://public.api.bsky.app/xrpc/app.bsky.actor.getProfile?actor={u}.bsky.social",
+                    "type":"api","profile":"https://bsky.app/profile/{u}.bsky.social"},
+    # --- HTTP-checked platforms (auto-checked, no manual work needed) ---
     "Pastebin":    {"url":"https://pastebin.com/u/{u}",
                     "type":"http","profile":"https://pastebin.com/u/{u}"},
-    "Codecademy":  {"url":"https://www.codecademy.com/profiles/{u}",
-                    "type":"http","profile":"https://www.codecademy.com/profiles/{u}"},
     "Linktree":    {"url":"https://linktr.ee/{u}",
                     "type":"http","profile":"https://linktr.ee/{u}"},
+    "Steam":       {"url":"https://steamcommunity.com/id/{u}",
+                    "type":"http","profile":"https://steamcommunity.com/id/{u}"},
+    "Medium":      {"url":"https://medium.com/@{u}",
+                    "type":"http","profile":"https://medium.com/@{u}"},
+    "About.me":    {"url":"https://about.me/{u}",
+                    "type":"http","profile":"https://about.me/{u}"},
+    "VK":          {"url":"https://vk.com/{u}",
+                    "type":"http","profile":"https://vk.com/{u}"},
+    "Behance":     {"url":"https://www.behance.net/{u}",
+                    "type":"http","profile":"https://www.behance.net/{u}"},
+    "Dribbble":    {"url":"https://dribbble.com/{u}",
+                    "type":"http","profile":"https://dribbble.com/{u}"},
+    "Pinterest":   {"url":"https://www.pinterest.com/{u}/",
+                    "type":"http","profile":"https://www.pinterest.com/{u}/"},
+    "SoundCloud":  {"url":"https://soundcloud.com/{u}",
+                    "type":"http","profile":"https://soundcloud.com/{u}"},
+    "Flickr":      {"url":"https://www.flickr.com/people/{u}/",
+                    "type":"http","profile":"https://www.flickr.com/people/{u}/"},
+    "Vimeo":       {"url":"https://vimeo.com/{u}",
+                    "type":"http","profile":"https://vimeo.com/{u}"},
+    "DeviantArt":  {"url":"https://www.deviantart.com/{u}",
+                    "type":"http","profile":"https://www.deviantart.com/{u}"},
+    "Tumblr":      {"url":"https://www.tumblr.com/{u}",
+                    "type":"http","profile":"https://www.tumblr.com/{u}"},
+    "500px":       {"url":"https://500px.com/p/{u}",
+                    "type":"http","profile":"https://500px.com/p/{u}"},
+    "Letterboxd":  {"url":"https://letterboxd.com/{u}/",
+                    "type":"http","profile":"https://letterboxd.com/{u}/"},
+    "Fiverr":      {"url":"https://www.fiverr.com/{u}",
+                    "type":"http","profile":"https://www.fiverr.com/{u}"},
+    "BuyMeACoffee":{"url":"https://www.buymeacoffee.com/{u}",
+                    "type":"http","profile":"https://www.buymeacoffee.com/{u}"},
+    "Ko-fi":       {"url":"https://ko-fi.com/{u}",
+                    "type":"http","profile":"https://ko-fi.com/{u}"},
+    "Disqus":      {"url":"https://disqus.com/by/{u}/",
+                    "type":"http","profile":"https://disqus.com/by/{u}/"},
+    "WordPress":   {"url":"https://profiles.wordpress.org/{u}/",
+                    "type":"http","profile":"https://profiles.wordpress.org/{u}/"},
+    "Archive.org": {"url":"https://archive.org/details/@{u}",
+                    "type":"http","profile":"https://archive.org/details/@{u}"},
+    "OpenSea":     {"url":"https://opensea.io/{u}",
+                    "type":"http","profile":"https://opensea.io/{u}"},
+    "Telegram":    {"url":"https://t.me/{u}",
+                    "type":"http","profile":"https://t.me/{u}"},
+    "Last.fm":     {"url":"https://www.last.fm/user/{u}",
+                    "type":"http","profile":"https://www.last.fm/user/{u}"},
+    "Wattpad":     {"url":"https://www.wattpad.com/user/{u}",
+                    "type":"http","profile":"https://www.wattpad.com/user/{u}"},
+    "Etsy":        {"url":"https://www.etsy.com/shop/{u}",
+                    "type":"http","profile":"https://www.etsy.com/shop/{u}"},
+    "Substack":    {"url":"https://substack.com/@{u}",
+                    "type":"http","profile":"https://substack.com/@{u}"},
+    "MyAnimeList": {"url":"https://myanimelist.net/profile/{u}",
+                    "type":"http","profile":"https://myanimelist.net/profile/{u}"},
+    "Poshmark":    {"url":"https://poshmark.com/closet/{u}",
+                    "type":"http","profile":"https://poshmark.com/closet/{u}"},
+    "Clubhouse":   {"url":"https://www.clubhouse.com/@{u}",
+                    "type":"http","profile":"https://www.clubhouse.com/@{u}"},
+    "Redbubble":   {"url":"https://www.redbubble.com/people/{u}",
+                    "type":"http","profile":"https://www.redbubble.com/people/{u}"},
+    "Mixcloud":    {"url":"https://www.mixcloud.com/{u}/",
+                    "type":"http","profile":"https://www.mixcloud.com/{u}/"},
+    "Giphy":       {"url":"https://giphy.com/{u}",
+                    "type":"http","profile":"https://giphy.com/{u}"},
+    "ArtStation":  {"url":"https://www.artstation.com/{u}",
+                    "type":"http","profile":"https://www.artstation.com/{u}"},
+    "eBay":        {"url":"https://www.ebay.com/usr/{u}",
+                    "type":"http","profile":"https://www.ebay.com/usr/{u}"},
+    "Quora":       {"url":"https://www.quora.com/profile/{u}",
+                    "type":"http","profile":"https://www.quora.com/profile/{u}"},
+    "Dailymotion": {"url":"https://www.dailymotion.com/{u}",
+                    "type":"http","profile":"https://www.dailymotion.com/{u}"},
+    "Rumble":      {"url":"https://rumble.com/user/{u}",
+                    "type":"http","profile":"https://rumble.com/user/{u}"},
+    # --- Manual verification (auth-required / heavy JS / bot protection) ---
     "Instagram":   {"type":"manual","profile":"https://www.instagram.com/{u}/"},
     "TikTok":      {"type":"manual","profile":"https://www.tiktok.com/@{u}"},
-    "Snapchat":    {"type":"manual","profile":"https://www.snapchat.com/add/{u}"},
-    "Spotify":     {"type":"manual","profile":"https://open.spotify.com/user/{u}"},
     "Twitter / X": {"type":"manual","profile":"https://twitter.com/{u}"},
     "YouTube":     {"type":"manual","profile":"https://www.youtube.com/@{u}"},
     "Twitch":      {"type":"manual","profile":"https://www.twitch.tv/{u}"},
-    "Steam":       {"type":"manual","profile":"https://steamcommunity.com/id/{u}"},
-    "Telegram":    {"type":"manual","profile":"https://t.me/{u}"},
-    "Medium":      {"type":"manual","profile":"https://medium.com/@{u}"},
-    "Pinterest":   {"type":"manual","profile":"https://www.pinterest.com/{u}/"},
-    "Roblox":      {"type":"manual","profile":"https://www.roblox.com/users/profile?username={u}"},
-    "Replit":      {"type":"manual","profile":"https://replit.com/@{u}"},
+    "Snapchat":    {"type":"manual","profile":"https://www.snapchat.com/add/{u}"},
+    "LinkedIn":    {"type":"manual","profile":"https://www.linkedin.com/in/{u}"},
+    "Threads":     {"type":"manual","profile":"https://www.threads.net/@{u}"},
+    "Kick":        {"type":"manual","profile":"https://kick.com/{u}"},
 }
 
 CARRIER_TABLE = {
@@ -337,8 +396,13 @@ CARRIER_TABLE = {
 }
 
 SESSION = requests.Session()
-SESSION.headers.update({"User-Agent": "Mozilla/5.0 EPC-OSINT/1.0"})
-TIMEOUT = 8
+SESSION.headers.update({
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                  "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 EPC-OSINT/1.0",
+    "Accept": "text/html,application/xhtml+xml,application/json,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.9",
+})
+TIMEOUT = 10
 
 def clear():
     os.system("cls" if sys.platform == "win32" else "clear")
@@ -421,6 +485,10 @@ def main_menu():
     print(f"\n  {W}Select >{R} ", end="", flush=True)
     return input().strip()
 
+# ---------------------------------------------------------------------------
+#  Platform check helpers
+# ---------------------------------------------------------------------------
+
 def check_platform(name, cfg, username):
     u       = username
     profile = cfg.get("profile","").replace("{u}", u)
@@ -450,9 +518,9 @@ def check_platform(name, cfg, username):
                 if not users:
                     return {"found": False, "url": profile, "data": {}, "kind": "api"}
                 d = users[0]
-            if name == "TryHackMe":
-                ok = d.get("status") == "success" or d.get("exists") is True
-                return {"found": ok, "url": profile, "data": d, "kind": "api"}
+            if name == "Bluesky":
+                if d.get("error"):
+                    return {"found": False, "url": profile, "data": {}, "kind": "api"}
             return {"found": True, "url": profile, "data": d, "kind": "api"}
 
         if kind == "api_list":
@@ -474,25 +542,118 @@ def check_platform(name, cfg, username):
     except Exception:
         return {"found": None, "url": profile, "data": {}, "kind": "error"}
 
+# ---------------------------------------------------------------------------
+#  Roblox — full API integration (Users / Friends / Inventory)
+# ---------------------------------------------------------------------------
+
+def check_roblox(username):
+    """Resolve a Roblox username and pull all legally available data."""
+    base_result = {"found": False, "url": "", "data": {}, "kind": "api"}
+
+    # Step 1 — resolve username to userId
+    try:
+        r = SESSION.post(
+            "https://users.roblox.com/v1/usernames/users",
+            json={"usernames": [username], "excludeBannedUsers": False},
+            timeout=TIMEOUT,
+            headers={"Content-Type": "application/json"})
+        if r.status_code != 200:
+            return base_result
+        d = r.json()
+        users = d.get("data", [])
+        if not users:
+            return base_result
+        user = users[0]
+        user_id = user.get("id")
+        if not user_id:
+            return base_result
+    except requests.exceptions.Timeout:
+        return {"found": None, "url": "", "data": {}, "kind": "timeout"}
+    except Exception:
+        return {"found": None, "url": "", "data": {}, "kind": "error"}
+
+    profile_url = f"https://www.roblox.com/users/{user_id}/profile"
+    roblox_data = {
+        "userId":      user_id,
+        "username":    user.get("name", username),
+        "displayName": user.get("displayName", ""),
+    }
+
+    # Step 2 — user details (creation date, ban status, bio)
+    try:
+        r2 = SESSION.get(
+            f"https://users.roblox.com/v1/users/{user_id}", timeout=TIMEOUT)
+        if r2.status_code == 200:
+            d2 = r2.json()
+            roblox_data["created"]     = d2.get("created", "")
+            roblox_data["isBanned"]    = d2.get("isBanned", False)
+            roblox_data["description"] = d2.get("description", "")
+            if d2.get("displayName"):
+                roblox_data["displayName"] = d2["displayName"]
+    except Exception:
+        pass
+
+    time.sleep(0.15)
+
+    # Step 3 — follower / following counts (Friends API)
+    for endpoint, key in [("followers", "followers"),
+                          ("followings", "following"),
+                          ("friends", "friends")]:
+        try:
+            rc = SESSION.get(
+                f"https://friends.roblox.com/v1/users/{user_id}/{endpoint}/count",
+                timeout=TIMEOUT)
+            if rc.status_code == 200:
+                roblox_data[key] = rc.json().get("count", 0)
+        except Exception:
+            pass
+
+    time.sleep(0.15)
+
+    # Step 4 — inventory collectibles value (Inventory API, public only)
+    try:
+        inv_url = (f"https://inventory.roblox.com/v1/users/{user_id}"
+                   f"/assets/collectibles?limit=100&sortOrder=Desc")
+        ri = SESSION.get(inv_url, timeout=TIMEOUT)
+        if ri.status_code == 200:
+            cd = ri.json()
+            items = cd.get("data", [])
+            total_rap = sum(item.get("recentAveragePrice", 0) or 0
+                           for item in items)
+            roblox_data["inventory_open"]    = True
+            roblox_data["collectible_count"] = len(items)
+            roblox_data["total_rap"]         = total_rap
+
+            cursor = cd.get("nextPageCursor")
+            pages  = 0
+            while cursor and pages < 10:
+                rn = SESSION.get(f"{inv_url}&cursor={cursor}",
+                                 timeout=TIMEOUT)
+                if rn.status_code != 200:
+                    break
+                cdn    = rn.json()
+                items2 = cdn.get("data", [])
+                total_rap += sum(i.get("recentAveragePrice", 0) or 0
+                                for i in items2)
+                roblox_data["collectible_count"] += len(items2)
+                roblox_data["total_rap"] = total_rap
+                cursor = cdn.get("nextPageCursor")
+                pages += 1
+                time.sleep(0.2)
+        elif ri.status_code == 403:
+            roblox_data["inventory_open"] = False
+    except Exception:
+        pass
+
+    return {"found": True, "url": profile_url, "data": roblox_data, "kind": "api"}
+
+# ---------------------------------------------------------------------------
+#  Extract human-readable info rows from platform data
+# ---------------------------------------------------------------------------
+
 def extract_info(name, data):
     if not data:
         return []
-    if name == "Chess.com":
-        pairs = [("Status",      data.get("status","N/A")),
-                 ("Joined",      fmt_ts(data.get("joined"))),
-                 ("Last Online", fmt_ts(data.get("last_online"))),
-                 ("Streamer",    "Yes" if data.get("is_streamer") else "No"),
-                 ("Verified",    "Yes" if data.get("verified") else "No")]
-        if data.get("title"): pairs.insert(0, ("Title", data["title"]))
-        return pairs
-    if name == "Lichess":
-        pairs = [("Username", data.get("username","N/A")),
-                 ("Online",   "Yes" if data.get("online") else "No")]
-        for cat in ("bullet","blitz","rapid","classical"):
-            v = data.get("perfs",{}).get(cat,{}).get("rating")
-            if v: pairs.append((f"{cat.capitalize()} rating", v))
-        if data.get("bio"): pairs.append(("Bio", data["bio"][:80]))
-        return pairs
     if name == "Reddit":
         return [("Name",        data.get("name","N/A")),
                 ("Total Karma", str(data.get("total_karma",
@@ -510,32 +671,95 @@ def extract_info(name, data):
                 ("Blog",         data.get("blog") or "N/A"),
                 ("Company",      data.get("company") or "N/A"),
                 ("Created",      fmt_dt(data.get("created_at","")))]
-    if name == "Dev.to":
-        return [("Name",    data.get("name","N/A")),
-                ("Summary", (data.get("summary") or "N/A")[:80]),
-                ("Joined",  fmt_dt(data.get("joined_at","")))]
-    if name == "GitLab":
-        return [("Name",    data.get("name","N/A")),
-                ("State",   data.get("state","N/A")),
-                ("Created", fmt_dt(data.get("created_at","")))]
-    if name == "HackerNews":
-        pairs = [("Karma",   str(data.get("karma","N/A"))),
-                 ("Created", fmt_ts(data.get("created")))]
-        if data.get("about"): pairs.append(("About", data["about"][:80]))
-        return pairs
-    if name == "Bitbucket":
-        return [("Display Name", data.get("display_name","N/A")),
-                ("Account Type", data.get("account_type","N/A")),
-                ("Created",      fmt_dt(data.get("created_on","")))]
     if name == "Duolingo":
         return [("Name",   data.get("name","N/A")),
                 ("Streak", str(data.get("streak","N/A"))),
                 ("XP",     str(data.get("totalXp","N/A")))]
-    if name == "Keybase":
-        them = data.get("them", [{}])
-        if isinstance(them, list) and them: them = them[0]
-        return [("Username", them.get("basics",{}).get("username","N/A"))]
+    if name == "Mastodon":
+        pairs = [("Username",     data.get("username","N/A")),
+                 ("Display Name", data.get("display_name","N/A")),
+                 ("Followers",    str(data.get("followers_count","N/A"))),
+                 ("Following",    str(data.get("following_count","N/A"))),
+                 ("Posts",        str(data.get("statuses_count","N/A"))),
+                 ("Created",      fmt_dt(data.get("created_at","")))]
+        note = data.get("note","")
+        if note and note != "<p></p>":
+            import re
+            clean = re.sub(r"<[^>]+>", "", note)[:80]
+            if clean:
+                pairs.append(("Bio", clean))
+        return pairs
+    if name == "Roblox":
+        pairs = [("User ID",      str(data.get("userId","N/A"))),
+                 ("Username",     data.get("username","N/A")),
+                 ("Display Name", data.get("displayName","N/A")),
+                 ("Created",      fmt_dt(data.get("created","")))]
+        if data.get("isBanned"):
+            pairs.append(("Status", "BANNED"))
+        if data.get("description"):
+            pairs.append(("Bio", data["description"][:80]))
+        if "followers" in data:
+            pairs.append(("Followers", str(data["followers"])))
+        if "following" in data:
+            pairs.append(("Following", str(data["following"])))
+        if "friends" in data:
+            pairs.append(("Friends", str(data["friends"])))
+        if data.get("inventory_open") is True:
+            pairs.append(("Collectibles", str(data.get("collectible_count", 0))))
+            pairs.append(("Total RAP (R$)", f"{data.get('total_rap', 0):,}"))
+        elif data.get("inventory_open") is False:
+            pairs.append(("Inventory", "Private"))
+        return pairs
+    if name == "Bluesky":
+        pairs = [("Handle",       data.get("handle", "N/A")),
+                 ("Display Name", data.get("displayName", "N/A")),
+                 ("Followers",    str(data.get("followersCount", "N/A"))),
+                 ("Following",    str(data.get("followsCount", "N/A"))),
+                 ("Posts",        str(data.get("postsCount", "N/A")))]
+        if data.get("description"):
+            pairs.append(("Bio", data["description"][:80]))
+        return pairs
     return []
+
+# ---------------------------------------------------------------------------
+#  Fetch follower usernames from platforms that expose them publicly
+# ---------------------------------------------------------------------------
+
+def _fetch_followers_github(username):
+    followers = set()
+    try:
+        r = SESSION.get(
+            f"https://api.github.com/users/{username}/followers?per_page=100",
+            timeout=TIMEOUT)
+        if r.status_code == 200:
+            for u in r.json():
+                login = u.get("login", "")
+                if login:
+                    followers.add(login.lower())
+    except Exception:
+        pass
+    return followers
+
+def _fetch_followers_roblox(user_id):
+    followers = set()
+    if not user_id:
+        return followers
+    try:
+        r = SESSION.get(
+            f"https://friends.roblox.com/v1/users/{user_id}/followers?limit=100",
+            timeout=TIMEOUT)
+        if r.status_code == 200:
+            for u in r.json().get("data", []):
+                name = u.get("name", "")
+                if name:
+                    followers.add(name.lower())
+    except Exception:
+        pass
+    return followers
+
+# ---------------------------------------------------------------------------
+#  Social Network Map (reworked — shared followers + digital collective data)
+# ---------------------------------------------------------------------------
 
 def show_network_map(username, results):
     clear(); sep()
@@ -572,18 +796,6 @@ def show_network_map(username, results):
                 all_locations.setdefault(v, []).append(plat)
             if k in bio_keys:
                 all_bios.setdefault(v[:60], []).append(plat)
-
-    print(f"  {W}[ PLATFORM NODES ]{R}"); print()
-    for plat in found_auto:
-        info = node_data.get(plat, {})
-        url  = results[plat].get("url", "")
-        print(f"  {GR}◉  {BLD}{plat}{R}")
-        if url:
-            print(f"  {GY}   ↳ {CY}{url}{R}")
-        for k, v in info.items():
-            if v not in ("N/A", "", "None"):
-                print(f"  {GY}   {k:<16}{W}{v}{R}")
-        print()
 
     has_links = False
 
@@ -623,24 +835,116 @@ def show_network_map(username, results):
         print(f"  {GY}  This may indicate different profile details are used per platform.{R}")
         print()
 
-    manual_found = [n for n, r in results.items() if r["kind"] == "manual"]
-    if manual_found:
-        sep(char="·")
-        print(f"  {YL}{BLD}[ PLATFORMS REQUIRING MANUAL VERIFICATION ]{R}")
-        print(f"  {GY}  The platforms below cannot be checked via API.")
-        print(f"  {GY}  Visit the profile URLs manually:{R}"); print()
-        for n in sorted(manual_found):
-            url = results[n].get("url","")
-            print(f"  {YL}◎  {W}{n:<18}{R}  {CY}{url}{R}")
+    # ── SHARED FOLLOWERS ──────────────────────────────────────────────────
+    sep(char="·")
+    print(f"  {YL}{BLD}[ SHARED FOLLOWERS ]{R}")
+    print(f"  {GY}  Cross-referencing follower lists from platforms with public APIs.{R}")
+    print()
+
+    stop_ev = threading.Event()
+    t = threading.Thread(target=spinner,
+                         args=(stop_ev, "Fetching follower data..."), daemon=True)
+    t.start()
+
+    followers_by_platform = {}
+    if "GitHub" in found_auto:
+        fs = _fetch_followers_github(username)
+        if fs:
+            followers_by_platform["GitHub"] = fs
+    if "Roblox" in found_auto:
+        rid = results["Roblox"].get("data", {}).get("userId")
+        fs = _fetch_followers_roblox(rid)
+        if fs:
+            followers_by_platform["Roblox"] = fs
+
+    stop_ev.set(); t.join()
+
+    if len(followers_by_platform) >= 2:
+        plat_keys = list(followers_by_platform.keys())
+        shared = set()
+        for i in range(len(plat_keys)):
+            for j in range(i + 1, len(plat_keys)):
+                shared.update(
+                    followers_by_platform[plat_keys[i]] &
+                    followers_by_platform[plat_keys[j]])
+        if shared:
+            print(f"  {GR}Found {len(shared)} shared follower(s) across platforms:{R}")
+            print()
+            for follower in sorted(shared)[:20]:
+                plats_with = [p for p, s in followers_by_platform.items()
+                              if follower in s]
+                joined = f" {GR}↔{R} ".join(f"{GR}{p}{R}" for p in plats_with)
+                print(f"  {GR}◈{R}  {W}{follower}{R}  →  {joined}")
+            if len(shared) > 20:
+                print(f"\n  {GY}  ... and {len(shared) - 20} more shared followers.{R}")
+        else:
+            print(f"  {GY}  No shared followers found across platforms.{R}")
+    elif len(followers_by_platform) == 1:
+        p   = list(followers_by_platform.keys())[0]
+        cnt = len(followers_by_platform[p])
+        print(f"  {GY}  Only {W}{p}{GY} provides follower data ({cnt} fetched).{R}")
+        print(f"  {GY}  Need 2+ platforms with public follower APIs for comparison.{R}")
+    else:
+        print(f"  {GY}  No follower data available from any confirmed platform.{R}")
+    print()
+
+    # ── DIGITAL COLLECTIVE DATA ───────────────────────────────────────────
+    sep(char="·")
+    print(f"  {YL}{BLD}[ DIGITAL COLLECTIVE DATA ]{R}")
+    print(f"  {GY}  Follower / following data from platforms with public social APIs.{R}")
+    print()
+
+    collective_shown = False
+    for plat in found_auto:
+        d = results[plat].get("data", {})
+        fc, fgc = None, None  # followers_count, following_count
+
+        if plat == "GitHub":
+            fc  = d.get("followers")
+            fgc = d.get("following")
+        elif plat == "Roblox":
+            fc  = d.get("followers")
+            fgc = d.get("following")
+        elif plat == "Mastodon":
+            fc  = d.get("followers_count")
+            fgc = d.get("following_count")
+        elif plat == "Bluesky":
+            fc  = d.get("followersCount")
+            fgc = d.get("followsCount")
+
+        if fc is not None or fgc is not None:
+            collective_shown = True
+            print(f"  {GR}◉  {BLD}{plat}{R}")
+            if fc is not None:
+                print(f"  {GY}    Followers  : {W}{fc}{R}")
+            if fgc is not None:
+                print(f"  {GY}    Following  : {W}{fgc}{R}")
+
+            if plat in followers_by_platform and followers_by_platform[plat]:
+                sample = sorted(followers_by_platform[plat])[:10]
+                total  = len(followers_by_platform[plat])
+                print(f"  {GY}    Sample followers ({total} fetched):{R}")
+                for f in sample:
+                    print(f"  {GY}      · {CY}{f}{R}")
+                if total > 10:
+                    print(f"  {GY}      ... and {total - 10} more{R}")
+            print()
+
+    if not collective_shown:
+        print(f"  {GY}  No follower/following data available from any confirmed platform.{R}")
         print()
 
     sep()
     print(f"  {GY}Note: The network map is based solely on publicly available API data.{R}")
     sep(); pause()
 
+# ---------------------------------------------------------------------------
+#  Spy scan engine
+# ---------------------------------------------------------------------------
+
 def run_spy_for_username(username):
     results    = {}
-    names      = list(PLATFORMS.keys())
+    names      = list(PLATFORMS.keys()) + ["Roblox"]
     lock       = threading.Lock()
     scan_lines = []
 
@@ -648,7 +952,10 @@ def run_spy_for_username(username):
     print(f"  {MG}{BLD}SCANNING  /  {YL}{username}{R}"); sep(); print()
 
     def check_one(n):
-        res = check_platform(n, PLATFORMS[n], username)
+        if n == "Roblox":
+            res = check_roblox(username)
+        else:
+            res = check_platform(n, PLATFORMS[n], username)
         with lock:
             results[n] = res
             f, url, knd = res["found"], res["url"], res["kind"]
@@ -665,7 +972,7 @@ def run_spy_for_username(username):
             print(line); sys.stdout.flush()
 
     from concurrent.futures import ThreadPoolExecutor, as_completed
-    with ThreadPoolExecutor(max_workers=12) as ex:
+    with ThreadPoolExecutor(max_workers=10) as ex:
         futures = {ex.submit(check_one, n): n for n in names}
         for fut in as_completed(futures):
             pass
@@ -710,7 +1017,7 @@ def _spy_result_pages(username, results, scan_lines):
     not_found    = [n for n, r in results.items() if r["found"] is False]
     errors       = [n for n, r in results.items()
                     if r["found"] is None and r["kind"] != "manual"]
-    total        = len(PLATFORMS)
+    total        = len(PLATFORMS) + 1  # +1 for Roblox
     conf_str     = ("HIGH"   if len(found_auto) >= 4 else
                     "MEDIUM" if len(found_auto) >= 2 else "LOW")
     conf_col     = (GR if conf_str == "HIGH" else YL if conf_str == "MEDIUM" else RD)
@@ -762,19 +1069,21 @@ def _spy_result_pages(username, results, scan_lines):
         if nav == "back": continue
         break
 
-    while True:
-        clear(); sep()
-        print(f"  {MG}{BLD}MANUAL CHECK LINKS{R}"); sep()
-        print(f"  {GY}Platforms listed below require manual verification.{R}"); print()
-        for i, n in enumerate(sorted(found_manual)):
-            url = results[n]["url"]
-            print(f"  {YL}{R}  {W}{n:<16}{R}  {CY}{url}{R}")
-            if (i+1) % 4 == 0: print()
-        print(); sep()
-        nav = nav_prompt()
-        if nav == "menu": return
-        if nav == "back": break
-        break
+    if found_manual:
+        while True:
+            clear(); sep()
+            print(f"  {MG}{BLD}MANUAL CHECK LINKS{R}"); sep()
+            print(f"  {GY}Platforms listed below require manual verification.{R}")
+            print(f"  {GY}(Auth-required or heavy JS / Cloudflare protection){R}"); print()
+            for i, n in enumerate(sorted(found_manual)):
+                url = results[n]["url"]
+                print(f"  {YL}{R}  {W}{n:<16}{R}  {CY}{url}{R}")
+                if (i+1) % 4 == 0: print()
+            print(); sep()
+            nav = nav_prompt()
+            if nav == "menu": return
+            if nav == "back": break
+            break
 
     clear(); sep()
     print(f"  {MG}{BLD}RESULTS{R}"); sep(); print()
@@ -940,6 +1249,10 @@ def spy_compare():
 
     print(); sep(); pause()
 
+# ---------------------------------------------------------------------------
+#  PWN Check
+# ---------------------------------------------------------------------------
+
 def pwn_check():
     clear(); sep()
     print(f"  {MG}{BLD}PWN CHECK  —  GMAIL BREACH LOOKUP{R}"); sep(); print()
@@ -1021,6 +1334,10 @@ def pwn_check():
                     print(f"  {GY}-{R} Breached {W}{fld}{R} at {W}{site}{R}")
 
     print(); sep(); pause()
+
+# ---------------------------------------------------------------------------
+#  Phone Number Lookup
+# ---------------------------------------------------------------------------
 
 def phone_lookup():
     clear(); sep()
@@ -1227,6 +1544,10 @@ def phone_lookup():
     print(f"  {GY}Owner identity is not available through open sources.{R}")
     sep(); pause()
 
+# ---------------------------------------------------------------------------
+#  IP Lookup
+# ---------------------------------------------------------------------------
+
 def ip_lookup():
     clear(); sep()
     print(f"  {MG}{BLD}IP LOOKUP{R}"); sep(); print()
@@ -1383,6 +1704,10 @@ def ip_lookup():
     sep()
     print(f"  {GY}Sources: ip-api.com  /  ipwho.is  /  socket rDNS  /  Shodan (link){R}")
     sep(); pause()
+
+# ---------------------------------------------------------------------------
+#  Domain Lookup
+# ---------------------------------------------------------------------------
 
 def domain_lookup():
     clear(); sep()
@@ -1650,6 +1975,10 @@ def domain_lookup():
     print(f"  {GY}Sources: RDAP  /  ip-api.com  /  Google DNS-over-HTTPS  /  SSL socket  /  crt.sh{R}")
     sep(); pause()
 
+# ---------------------------------------------------------------------------
+#  Email Lookup
+# ---------------------------------------------------------------------------
+
 def email_lookup():
     import hashlib
 
@@ -1852,6 +2181,10 @@ def email_lookup():
     print(f"  {GY}Sources: Gravatar / GitHub API / Keybase / XposedOrNot{R}")
     print(f"  {GY}Note: Account existence does not equal ownership. Results are indicative only.{R}")
     sep(); pause()
+
+# ---------------------------------------------------------------------------
+#  Main
+# ---------------------------------------------------------------------------
 
 def main():
     if sys.platform == "win32":

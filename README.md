@@ -10,13 +10,14 @@ personal data exposure assessment, and cybersecurity education.
 ## Features
 
 ### 🕵️ Spy Command — Username OSINT
-- Scans 30+ platforms simultaneously (GitHub, Reddit, Chess.com, Lichess, TryHackMe and more)
+- Scans 55 platforms simultaneously (GitHub, Reddit, Mastodon, Bluesky, Roblox, Pinterest, Etsy and more)
 - Three scan modes:
   - **Single Scan** — detailed report for one username
   - **Bulk Scan** — scan up to 10 usernames at once
   - **Compare Mode** — compare two usernames side by side, highlights shared platforms
-- Social Network Map — detects shared name, location, and bio across platforms
-- API-verified results + manual verification links for JS-protected platforms
+- Social Network Map — shared followers cross-platform, digital collective data, shared name/location/bio
+- Roblox deep integration — Users API, Friends API (followers/following/friends count), Inventory API (collectible RAP value)
+- API-verified results + manual verification links only for auth-required / JS-protected platforms
 
 ### 🔓 PWN Check — Email Breach Lookup
 - Queries public breach databases (XposedOrNot, LeakCheck)
@@ -89,36 +90,60 @@ python ethics_spy.py
 | Platform | Check Type |
 |----------|-----------|
 | GitHub | API |
-| GitLab | API |
 | Reddit | API |
-| Chess.com | API |
-| Lichess | API |
-| HackerNews | API |
-| Dev.to | API |
 | Duolingo | API |
-| Keybase | API |
-| TryHackMe | API |
-| Bitbucket | API |
-| npm | API |
 | Gravatar | API |
-| PyPI | API |
-| ProductHunt | HTTP |
-| Pastebin | HTTP |
-| Codecademy | HTTP |
-| Linktree | HTTP |
+| Mastodon | API |
+| Bluesky | API |
+| Roblox | API (Users + Friends + Inventory) |
+| Pastebin | Auto |
+| Linktree | Auto |
+| Steam | Auto |
+| Medium | Auto |
+| About.me | Auto |
+| VK | Auto |
+| Behance | Auto |
+| Dribbble | Auto |
+| Pinterest | Auto |
+| SoundCloud | Auto |
+| Flickr | Auto |
+| Vimeo | Auto |
+| DeviantArt | Auto |
+| Tumblr | Auto |
+| 500px | Auto |
+| Letterboxd | Auto |
+| Fiverr | Auto |
+| BuyMeACoffee | Auto |
+| Ko-fi | Auto |
+| Disqus | Auto |
+| WordPress | Auto |
+| Archive.org | Auto |
+| OpenSea | Auto |
+| Telegram | Auto |
+| Last.fm | Auto |
+| Wattpad | Auto |
+| Etsy | Auto |
+| Substack | Auto |
+| MyAnimeList | Auto |
+| Poshmark | Auto |
+| Clubhouse | Auto |
+| Redbubble | Auto |
+| Mixcloud | Auto |
+| Giphy | Auto |
+| ArtStation | Auto |
+| eBay | Auto |
+| Quora | Auto |
+| Dailymotion | Auto |
+| Rumble | Auto |
 | Instagram | Manual |
 | TikTok | Manual |
 | Twitter / X | Manual |
 | YouTube | Manual |
 | Twitch | Manual |
-| Steam | Manual |
-| Telegram | Manual |
-| Spotify | Manual |
 | Snapchat | Manual |
-| Medium | Manual |
-| Pinterest | Manual |
-| Roblox | Manual |
-| Replit | Manual |
+| LinkedIn | Manual |
+| Threads | Manual |
+| Kick | Manual |
 
 ---
 
