@@ -10,7 +10,7 @@ personal data exposure assessment, and cybersecurity education.
 ## Features
 
 ### 🕵️ Spy Command — Username OSINT
-- Scans 56 platforms simultaneously (GitHub, Reddit, Mastodon, Bluesky, Codeforces, Roblox, TryHackMe and more)
+- Scans 55 platforms simultaneously (GitHub, Reddit, Mastodon, Bluesky, Roblox, Pinterest, Etsy and more)
 - Three scan modes:
   - **Single Scan** — detailed report for one username
   - **Bulk Scan** — scan up to 10 usernames at once
@@ -90,52 +90,51 @@ python ethics_spy.py
 | Platform | Check Type |
 |----------|-----------|
 | GitHub | API |
-| GitLab | API |
 | Reddit | API |
-| Lichess | API |
-| HackerNews | API |
 | Duolingo | API |
-| Dev.to | API |
-| npm | API |
 | Gravatar | API |
-| Keybase | API |
-| Bitbucket | API |
-| TryHackMe | API |
-| PyPI | API |
 | Mastodon | API |
-| Roblox | API (Users + Friends + Inventory) |
-| Codeforces | API |
 | Bluesky | API |
-| Pastebin | HTTP |
-| Codecademy | HTTP |
-| Linktree | HTTP |
-| Steam | HTTP |
-| Medium | HTTP |
-| Replit | HTTP |
-| About.me | HTTP |
-| VK | HTTP |
-| HackerOne | HTTP |
-| Behance | HTTP |
-| Dribbble | HTTP |
-| Pinterest | HTTP |
-| SoundCloud | HTTP |
-| Flickr | HTTP |
-| Vimeo | HTTP |
-| DeviantArt | HTTP |
-| Tumblr | HTTP |
-| 500px | HTTP |
-| Letterboxd | HTTP |
-| Fiverr | HTTP |
-| Kaggle | HTTP |
-| LeetCode | HTTP |
-| BuyMeACoffee | HTTP |
-| Ko-fi | HTTP |
-| Disqus | HTTP |
-| SlideShare | HTTP |
-| WordPress | HTTP |
-| Archive.org | HTTP |
-| Instructables | HTTP |
-| OpenSea | HTTP |
+| Roblox | API (Users + Friends + Inventory) |
+| Pastebin | Auto |
+| Linktree | Auto |
+| Steam | Auto |
+| Medium | Auto |
+| About.me | Auto |
+| VK | Auto |
+| Behance | Auto |
+| Dribbble | Auto |
+| Pinterest | Auto |
+| SoundCloud | Auto |
+| Flickr | Auto |
+| Vimeo | Auto |
+| DeviantArt | Auto |
+| Tumblr | Auto |
+| 500px | Auto |
+| Letterboxd | Auto |
+| Fiverr | Auto |
+| BuyMeACoffee | Auto |
+| Ko-fi | Auto |
+| Disqus | Auto |
+| WordPress | Auto |
+| Archive.org | Auto |
+| OpenSea | Auto |
+| Telegram | Auto |
+| Last.fm | Auto |
+| Wattpad | Auto |
+| Etsy | Auto |
+| Substack | Auto |
+| MyAnimeList | Auto |
+| Poshmark | Auto |
+| Clubhouse | Auto |
+| Redbubble | Auto |
+| Mixcloud | Auto |
+| Giphy | Auto |
+| ArtStation | Auto |
+| eBay | Auto |
+| Quora | Auto |
+| Dailymotion | Auto |
+| Rumble | Auto |
 | Instagram | Manual |
 | TikTok | Manual |
 | Twitter / X | Manual |

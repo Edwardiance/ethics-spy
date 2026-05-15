@@ -73,56 +73,30 @@ PLATFORMS = {
     # --- API-verified platforms ---
     "GitHub":      {"url":"https://api.github.com/users/{u}",
                     "type":"api","profile":"https://github.com/{u}"},
-    "GitLab":      {"url":"https://gitlab.com/api/v4/users?username={u}",
-                    "type":"api_list","profile":"https://gitlab.com/{u}"},
     "Reddit":      {"url":"https://www.reddit.com/user/{u}/about.json",
                     "type":"api","profile":"https://www.reddit.com/user/{u}",
                     "headers":{"User-Agent":"EPC-OSINT/1.0"}},
-    "Lichess":     {"url":"https://lichess.org/api/user/{u}",
-                    "type":"api","profile":"https://lichess.org/@/{u}"},
-    "HackerNews":  {"url":"https://hacker-news.firebaseio.com/v0/user/{u}.json",
-                    "type":"api","profile":"https://news.ycombinator.com/user?id={u}"},
     "Duolingo":    {"url":"https://www.duolingo.com/2017-06-30/users?username={u}",
                     "type":"api","profile":"https://www.duolingo.com/profile/{u}"},
-    "Dev.to":      {"url":"https://dev.to/api/users/by_username?url={u}",
-                    "type":"api","profile":"https://dev.to/{u}"},
-    "npm":         {"url":"https://registry.npmjs.org/-/user/org.couchdb.user:{u}",
-                    "type":"api","profile":"https://www.npmjs.com/~{u}"},
     "Gravatar":    {"url":"https://en.gravatar.com/{u}.json",
                     "type":"api","profile":"https://en.gravatar.com/{u}"},
-    "Keybase":     {"url":"https://keybase.io/_/api/1.0/user/lookup.json?username={u}",
-                    "type":"api","profile":"https://keybase.io/{u}"},
-    "Bitbucket":   {"url":"https://api.bitbucket.org/2.0/users/{u}",
-                    "type":"api","profile":"https://bitbucket.org/{u}"},
-    "TryHackMe":   {"url":"https://tryhackme.com/api/user/exist/{u}",
-                    "type":"api","profile":"https://tryhackme.com/p/{u}"},
-    "PyPI":        {"url":"https://pypi.org/pypi/{u}/json",
-                    "type":"api","profile":"https://pypi.org/user/{u}"},
     "Mastodon":    {"url":"https://mastodon.social/api/v1/accounts/lookup?acct={u}",
                     "type":"api","profile":"https://mastodon.social/@{u}"},
-    "Codeforces":  {"url":"https://codeforces.com/api/user.info?handles={u}",
-                    "type":"api","profile":"https://codeforces.com/profile/{u}"},
     "Bluesky":     {"url":"https://public.api.bsky.app/xrpc/app.bsky.actor.getProfile?actor={u}.bsky.social",
                     "type":"api","profile":"https://bsky.app/profile/{u}.bsky.social"},
-    # --- HTTP-checked platforms ---
+    # --- HTTP-checked platforms (auto-checked, no manual work needed) ---
     "Pastebin":    {"url":"https://pastebin.com/u/{u}",
                     "type":"http","profile":"https://pastebin.com/u/{u}"},
-    "Codecademy":  {"url":"https://www.codecademy.com/profiles/{u}",
-                    "type":"http","profile":"https://www.codecademy.com/profiles/{u}"},
     "Linktree":    {"url":"https://linktr.ee/{u}",
                     "type":"http","profile":"https://linktr.ee/{u}"},
     "Steam":       {"url":"https://steamcommunity.com/id/{u}",
                     "type":"http","profile":"https://steamcommunity.com/id/{u}"},
     "Medium":      {"url":"https://medium.com/@{u}",
                     "type":"http","profile":"https://medium.com/@{u}"},
-    "Replit":      {"url":"https://replit.com/@{u}",
-                    "type":"http","profile":"https://replit.com/@{u}"},
     "About.me":    {"url":"https://about.me/{u}",
                     "type":"http","profile":"https://about.me/{u}"},
     "VK":          {"url":"https://vk.com/{u}",
                     "type":"http","profile":"https://vk.com/{u}"},
-    "HackerOne":   {"url":"https://hackerone.com/{u}",
-                    "type":"http","profile":"https://hackerone.com/{u}"},
     "Behance":     {"url":"https://www.behance.net/{u}",
                     "type":"http","profile":"https://www.behance.net/{u}"},
     "Dribbble":    {"url":"https://dribbble.com/{u}",
@@ -145,26 +119,50 @@ PLATFORMS = {
                     "type":"http","profile":"https://letterboxd.com/{u}/"},
     "Fiverr":      {"url":"https://www.fiverr.com/{u}",
                     "type":"http","profile":"https://www.fiverr.com/{u}"},
-    "Kaggle":      {"url":"https://www.kaggle.com/{u}",
-                    "type":"http","profile":"https://www.kaggle.com/{u}"},
-    "LeetCode":    {"url":"https://leetcode.com/{u}/",
-                    "type":"http","profile":"https://leetcode.com/{u}/"},
     "BuyMeACoffee":{"url":"https://www.buymeacoffee.com/{u}",
                     "type":"http","profile":"https://www.buymeacoffee.com/{u}"},
     "Ko-fi":       {"url":"https://ko-fi.com/{u}",
                     "type":"http","profile":"https://ko-fi.com/{u}"},
     "Disqus":      {"url":"https://disqus.com/by/{u}/",
                     "type":"http","profile":"https://disqus.com/by/{u}/"},
-    "SlideShare":  {"url":"https://www.slideshare.net/{u}",
-                    "type":"http","profile":"https://www.slideshare.net/{u}"},
     "WordPress":   {"url":"https://profiles.wordpress.org/{u}/",
                     "type":"http","profile":"https://profiles.wordpress.org/{u}/"},
     "Archive.org": {"url":"https://archive.org/details/@{u}",
                     "type":"http","profile":"https://archive.org/details/@{u}"},
-    "Instructables":{"url":"https://www.instructables.com/member/{u}/",
-                    "type":"http","profile":"https://www.instructables.com/member/{u}/"},
     "OpenSea":     {"url":"https://opensea.io/{u}",
                     "type":"http","profile":"https://opensea.io/{u}"},
+    "Telegram":    {"url":"https://t.me/{u}",
+                    "type":"http","profile":"https://t.me/{u}"},
+    "Last.fm":     {"url":"https://www.last.fm/user/{u}",
+                    "type":"http","profile":"https://www.last.fm/user/{u}"},
+    "Wattpad":     {"url":"https://www.wattpad.com/user/{u}",
+                    "type":"http","profile":"https://www.wattpad.com/user/{u}"},
+    "Etsy":        {"url":"https://www.etsy.com/shop/{u}",
+                    "type":"http","profile":"https://www.etsy.com/shop/{u}"},
+    "Substack":    {"url":"https://substack.com/@{u}",
+                    "type":"http","profile":"https://substack.com/@{u}"},
+    "MyAnimeList": {"url":"https://myanimelist.net/profile/{u}",
+                    "type":"http","profile":"https://myanimelist.net/profile/{u}"},
+    "Poshmark":    {"url":"https://poshmark.com/closet/{u}",
+                    "type":"http","profile":"https://poshmark.com/closet/{u}"},
+    "Clubhouse":   {"url":"https://www.clubhouse.com/@{u}",
+                    "type":"http","profile":"https://www.clubhouse.com/@{u}"},
+    "Redbubble":   {"url":"https://www.redbubble.com/people/{u}",
+                    "type":"http","profile":"https://www.redbubble.com/people/{u}"},
+    "Mixcloud":    {"url":"https://www.mixcloud.com/{u}/",
+                    "type":"http","profile":"https://www.mixcloud.com/{u}/"},
+    "Giphy":       {"url":"https://giphy.com/{u}",
+                    "type":"http","profile":"https://giphy.com/{u}"},
+    "ArtStation":  {"url":"https://www.artstation.com/{u}",
+                    "type":"http","profile":"https://www.artstation.com/{u}"},
+    "eBay":        {"url":"https://www.ebay.com/usr/{u}",
+                    "type":"http","profile":"https://www.ebay.com/usr/{u}"},
+    "Quora":       {"url":"https://www.quora.com/profile/{u}",
+                    "type":"http","profile":"https://www.quora.com/profile/{u}"},
+    "Dailymotion": {"url":"https://www.dailymotion.com/{u}",
+                    "type":"http","profile":"https://www.dailymotion.com/{u}"},
+    "Rumble":      {"url":"https://rumble.com/user/{u}",
+                    "type":"http","profile":"https://rumble.com/user/{u}"},
     # --- Manual verification (auth-required / heavy JS / bot protection) ---
     "Instagram":   {"type":"manual","profile":"https://www.instagram.com/{u}/"},
     "TikTok":      {"type":"manual","profile":"https://www.tiktok.com/@{u}"},
@@ -520,13 +518,6 @@ def check_platform(name, cfg, username):
                 if not users:
                     return {"found": False, "url": profile, "data": {}, "kind": "api"}
                 d = users[0]
-            if name == "TryHackMe":
-                ok = d.get("status") == "success" or d.get("exists") is True
-                return {"found": ok, "url": profile, "data": d, "kind": "api"}
-            if name == "Codeforces":
-                if d.get("status") != "OK" or not d.get("result"):
-                    return {"found": False, "url": profile, "data": {}, "kind": "api"}
-                return {"found": True, "url": profile, "data": d, "kind": "api"}
             if name == "Bluesky":
                 if d.get("error"):
                     return {"found": False, "url": profile, "data": {}, "kind": "api"}
@@ -663,18 +654,6 @@ def check_roblox(username):
 def extract_info(name, data):
     if not data:
         return []
-    if name == "Lichess":
-        pairs = [("Username", data.get("username","N/A")),
-                 ("Online",   "Yes" if data.get("online") else "No")]
-        if data.get("nbFollowers") is not None:
-            pairs.append(("Followers", str(data["nbFollowers"])))
-        if data.get("nbFollowing") is not None:
-            pairs.append(("Following", str(data["nbFollowing"])))
-        for cat in ("bullet","blitz","rapid","classical"):
-            v = data.get("perfs",{}).get(cat,{}).get("rating")
-            if v: pairs.append((f"{cat.capitalize()} rating", v))
-        if data.get("bio"): pairs.append(("Bio", data["bio"][:80]))
-        return pairs
     if name == "Reddit":
         return [("Name",        data.get("name","N/A")),
                 ("Total Karma", str(data.get("total_karma",
@@ -692,31 +671,10 @@ def extract_info(name, data):
                 ("Blog",         data.get("blog") or "N/A"),
                 ("Company",      data.get("company") or "N/A"),
                 ("Created",      fmt_dt(data.get("created_at","")))]
-    if name == "Dev.to":
-        return [("Name",    data.get("name","N/A")),
-                ("Summary", (data.get("summary") or "N/A")[:80]),
-                ("Joined",  fmt_dt(data.get("joined_at","")))]
-    if name == "GitLab":
-        return [("Name",    data.get("name","N/A")),
-                ("State",   data.get("state","N/A")),
-                ("Created", fmt_dt(data.get("created_at","")))]
-    if name == "HackerNews":
-        pairs = [("Karma",   str(data.get("karma","N/A"))),
-                 ("Created", fmt_ts(data.get("created")))]
-        if data.get("about"): pairs.append(("About", data["about"][:80]))
-        return pairs
-    if name == "Bitbucket":
-        return [("Display Name", data.get("display_name","N/A")),
-                ("Account Type", data.get("account_type","N/A")),
-                ("Created",      fmt_dt(data.get("created_on","")))]
     if name == "Duolingo":
         return [("Name",   data.get("name","N/A")),
                 ("Streak", str(data.get("streak","N/A"))),
                 ("XP",     str(data.get("totalXp","N/A")))]
-    if name == "Keybase":
-        them = data.get("them", [{}])
-        if isinstance(them, list) and them: them = them[0]
-        return [("Username", them.get("basics",{}).get("username","N/A"))]
     if name == "Mastodon":
         pairs = [("Username",     data.get("username","N/A")),
                  ("Display Name", data.get("display_name","N/A")),
@@ -751,23 +709,6 @@ def extract_info(name, data):
             pairs.append(("Total RAP (R$)", f"{data.get('total_rap', 0):,}"))
         elif data.get("inventory_open") is False:
             pairs.append(("Inventory", "Private"))
-        return pairs
-    if name == "Codeforces":
-        result = data.get("result", [data] if "handle" in data else [])
-        u = result[0] if result else data
-        pairs = [("Handle",     u.get("handle", "N/A")),
-                 ("Rating",     str(u.get("rating", "N/A"))),
-                 ("Max Rating", str(u.get("maxRating", "N/A"))),
-                 ("Rank",       u.get("rank", "N/A")),
-                 ("Max Rank",   u.get("maxRank", "N/A"))]
-        if u.get("firstName") or u.get("lastName"):
-            pairs.append(("Name", f"{u.get('firstName','')} {u.get('lastName','')}".strip()))
-        if u.get("country"):
-            pairs.append(("Country", u["country"]))
-        if u.get("city"):
-            pairs.append(("City", u["city"]))
-        if u.get("organization"):
-            pairs.append(("Organization", u["organization"]))
         return pairs
     if name == "Bluesky":
         pairs = [("Handle",       data.get("handle", "N/A")),
@@ -967,9 +908,6 @@ def show_network_map(username, results):
         elif plat == "Mastodon":
             fc  = d.get("followers_count")
             fgc = d.get("following_count")
-        elif plat == "Lichess":
-            fc  = d.get("nbFollowers")
-            fgc = d.get("nbFollowing")
         elif plat == "Bluesky":
             fc  = d.get("followersCount")
             fgc = d.get("followsCount")
