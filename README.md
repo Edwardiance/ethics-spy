@@ -10,7 +10,7 @@ personal data exposure assessment, and cybersecurity education.
 ## Features
 
 ### 🕵️ Spy Command — Username OSINT
-- Scans 34 platforms simultaneously (GitHub, Reddit, Mastodon, Lichess, Roblox, TryHackMe and more)
+- Scans 56 platforms simultaneously (GitHub, Reddit, Mastodon, Bluesky, Codeforces, Roblox, TryHackMe and more)
 - Three scan modes:
   - **Single Scan** — detailed report for one username
   - **Bulk Scan** — scan up to 10 usernames at once
@@ -104,6 +104,8 @@ python ethics_spy.py
 | PyPI | API |
 | Mastodon | API |
 | Roblox | API (Users + Friends + Inventory) |
+| Codeforces | API |
+| Bluesky | API |
 | Pastebin | HTTP |
 | Codecademy | HTTP |
 | Linktree | HTTP |
@@ -115,14 +117,34 @@ python ethics_spy.py
 | HackerOne | HTTP |
 | Behance | HTTP |
 | Dribbble | HTTP |
+| Pinterest | HTTP |
+| SoundCloud | HTTP |
+| Flickr | HTTP |
+| Vimeo | HTTP |
+| DeviantArt | HTTP |
+| Tumblr | HTTP |
+| 500px | HTTP |
+| Letterboxd | HTTP |
+| Fiverr | HTTP |
+| Kaggle | HTTP |
+| LeetCode | HTTP |
+| BuyMeACoffee | HTTP |
+| Ko-fi | HTTP |
+| Disqus | HTTP |
+| SlideShare | HTTP |
+| WordPress | HTTP |
+| Archive.org | HTTP |
+| Instructables | HTTP |
+| OpenSea | HTTP |
 | Instagram | Manual |
 | TikTok | Manual |
 | Twitter / X | Manual |
 | YouTube | Manual |
 | Twitch | Manual |
-| Spotify | Manual |
 | Snapchat | Manual |
 | LinkedIn | Manual |
+| Threads | Manual |
+| Kick | Manual |
 
 ---
 

@@ -100,6 +100,10 @@ PLATFORMS = {
                     "type":"api","profile":"https://pypi.org/user/{u}"},
     "Mastodon":    {"url":"https://mastodon.social/api/v1/accounts/lookup?acct={u}",
                     "type":"api","profile":"https://mastodon.social/@{u}"},
+    "Codeforces":  {"url":"https://codeforces.com/api/user.info?handles={u}",
+                    "type":"api","profile":"https://codeforces.com/profile/{u}"},
+    "Bluesky":     {"url":"https://public.api.bsky.app/xrpc/app.bsky.actor.getProfile?actor={u}.bsky.social",
+                    "type":"api","profile":"https://bsky.app/profile/{u}.bsky.social"},
     # --- HTTP-checked platforms ---
     "Pastebin":    {"url":"https://pastebin.com/u/{u}",
                     "type":"http","profile":"https://pastebin.com/u/{u}"},
@@ -123,15 +127,54 @@ PLATFORMS = {
                     "type":"http","profile":"https://www.behance.net/{u}"},
     "Dribbble":    {"url":"https://dribbble.com/{u}",
                     "type":"http","profile":"https://dribbble.com/{u}"},
+    "Pinterest":   {"url":"https://www.pinterest.com/{u}/",
+                    "type":"http","profile":"https://www.pinterest.com/{u}/"},
+    "SoundCloud":  {"url":"https://soundcloud.com/{u}",
+                    "type":"http","profile":"https://soundcloud.com/{u}"},
+    "Flickr":      {"url":"https://www.flickr.com/people/{u}/",
+                    "type":"http","profile":"https://www.flickr.com/people/{u}/"},
+    "Vimeo":       {"url":"https://vimeo.com/{u}",
+                    "type":"http","profile":"https://vimeo.com/{u}"},
+    "DeviantArt":  {"url":"https://www.deviantart.com/{u}",
+                    "type":"http","profile":"https://www.deviantart.com/{u}"},
+    "Tumblr":      {"url":"https://www.tumblr.com/{u}",
+                    "type":"http","profile":"https://www.tumblr.com/{u}"},
+    "500px":       {"url":"https://500px.com/p/{u}",
+                    "type":"http","profile":"https://500px.com/p/{u}"},
+    "Letterboxd":  {"url":"https://letterboxd.com/{u}/",
+                    "type":"http","profile":"https://letterboxd.com/{u}/"},
+    "Fiverr":      {"url":"https://www.fiverr.com/{u}",
+                    "type":"http","profile":"https://www.fiverr.com/{u}"},
+    "Kaggle":      {"url":"https://www.kaggle.com/{u}",
+                    "type":"http","profile":"https://www.kaggle.com/{u}"},
+    "LeetCode":    {"url":"https://leetcode.com/{u}/",
+                    "type":"http","profile":"https://leetcode.com/{u}/"},
+    "BuyMeACoffee":{"url":"https://www.buymeacoffee.com/{u}",
+                    "type":"http","profile":"https://www.buymeacoffee.com/{u}"},
+    "Ko-fi":       {"url":"https://ko-fi.com/{u}",
+                    "type":"http","profile":"https://ko-fi.com/{u}"},
+    "Disqus":      {"url":"https://disqus.com/by/{u}/",
+                    "type":"http","profile":"https://disqus.com/by/{u}/"},
+    "SlideShare":  {"url":"https://www.slideshare.net/{u}",
+                    "type":"http","profile":"https://www.slideshare.net/{u}"},
+    "WordPress":   {"url":"https://profiles.wordpress.org/{u}/",
+                    "type":"http","profile":"https://profiles.wordpress.org/{u}/"},
+    "Archive.org": {"url":"https://archive.org/details/@{u}",
+                    "type":"http","profile":"https://archive.org/details/@{u}"},
+    "Instructables":{"url":"https://www.instructables.com/member/{u}/",
+                    "type":"http","profile":"https://www.instructables.com/member/{u}/"},
+    "OpenSea":     {"url":"https://opensea.io/{u}",
+                    "type":"http","profile":"https://opensea.io/{u}"},
     # --- Manual verification (auth-required / heavy JS / bot protection) ---
     "Instagram":   {"type":"manual","profile":"https://www.instagram.com/{u}/"},
     "TikTok":      {"type":"manual","profile":"https://www.tiktok.com/@{u}"},
     "Twitter / X": {"type":"manual","profile":"https://twitter.com/{u}"},
     "YouTube":     {"type":"manual","profile":"https://www.youtube.com/@{u}"},
     "Twitch":      {"type":"manual","profile":"https://www.twitch.tv/{u}"},
-    "Spotify":     {"type":"manual","profile":"https://open.spotify.com/user/{u}"},
     "Snapchat":    {"type":"manual","profile":"https://www.snapchat.com/add/{u}"},
     "LinkedIn":    {"type":"manual","profile":"https://www.linkedin.com/in/{u}"},
+    "Threads":     {"type":"manual","profile":"https://www.threads.net/@{u}"},
+    "Kick":        {"type":"manual","profile":"https://kick.com/{u}"},
 }
 
 CARRIER_TABLE = {
@@ -480,6 +523,13 @@ def check_platform(name, cfg, username):
             if name == "TryHackMe":
                 ok = d.get("status") == "success" or d.get("exists") is True
                 return {"found": ok, "url": profile, "data": d, "kind": "api"}
+            if name == "Codeforces":
+                if d.get("status") != "OK" or not d.get("result"):
+                    return {"found": False, "url": profile, "data": {}, "kind": "api"}
+                return {"found": True, "url": profile, "data": d, "kind": "api"}
+            if name == "Bluesky":
+                if d.get("error"):
+                    return {"found": False, "url": profile, "data": {}, "kind": "api"}
             return {"found": True, "url": profile, "data": d, "kind": "api"}
 
         if kind == "api_list":
@@ -702,6 +752,32 @@ def extract_info(name, data):
         elif data.get("inventory_open") is False:
             pairs.append(("Inventory", "Private"))
         return pairs
+    if name == "Codeforces":
+        result = data.get("result", [data] if "handle" in data else [])
+        u = result[0] if result else data
+        pairs = [("Handle",     u.get("handle", "N/A")),
+                 ("Rating",     str(u.get("rating", "N/A"))),
+                 ("Max Rating", str(u.get("maxRating", "N/A"))),
+                 ("Rank",       u.get("rank", "N/A")),
+                 ("Max Rank",   u.get("maxRank", "N/A"))]
+        if u.get("firstName") or u.get("lastName"):
+            pairs.append(("Name", f"{u.get('firstName','')} {u.get('lastName','')}".strip()))
+        if u.get("country"):
+            pairs.append(("Country", u["country"]))
+        if u.get("city"):
+            pairs.append(("City", u["city"]))
+        if u.get("organization"):
+            pairs.append(("Organization", u["organization"]))
+        return pairs
+    if name == "Bluesky":
+        pairs = [("Handle",       data.get("handle", "N/A")),
+                 ("Display Name", data.get("displayName", "N/A")),
+                 ("Followers",    str(data.get("followersCount", "N/A"))),
+                 ("Following",    str(data.get("followsCount", "N/A"))),
+                 ("Posts",        str(data.get("postsCount", "N/A")))]
+        if data.get("description"):
+            pairs.append(("Bio", data["description"][:80]))
+        return pairs
     return []
 
 # ---------------------------------------------------------------------------
@@ -894,6 +970,9 @@ def show_network_map(username, results):
         elif plat == "Lichess":
             fc  = d.get("nbFollowers")
             fgc = d.get("nbFollowing")
+        elif plat == "Bluesky":
+            fc  = d.get("followersCount")
+            fgc = d.get("followsCount")
 
         if fc is not None or fgc is not None:
             collective_shown = True
