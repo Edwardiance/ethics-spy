@@ -10,13 +10,14 @@ personal data exposure assessment, and cybersecurity education.
 ## Features
 
 ### 🕵️ Spy Command — Username OSINT
-- Scans 30+ platforms simultaneously (GitHub, Reddit, Chess.com, Lichess, TryHackMe and more)
+- Scans 34 platforms simultaneously (GitHub, Reddit, Mastodon, Lichess, Roblox, TryHackMe and more)
 - Three scan modes:
   - **Single Scan** — detailed report for one username
   - **Bulk Scan** — scan up to 10 usernames at once
   - **Compare Mode** — compare two usernames side by side, highlights shared platforms
-- Social Network Map — detects shared name, location, and bio across platforms
-- API-verified results + manual verification links for JS-protected platforms
+- Social Network Map — shared followers cross-platform, digital collective data, shared name/location/bio
+- Roblox deep integration — Users API, Friends API (followers/following/friends count), Inventory API (collectible RAP value)
+- API-verified results + manual verification links only for auth-required / JS-protected platforms
 
 ### 🔓 PWN Check — Email Breach Lookup
 - Queries public breach databases (XposedOrNot, LeakCheck)
@@ -91,34 +92,37 @@ python ethics_spy.py
 | GitHub | API |
 | GitLab | API |
 | Reddit | API |
-| Chess.com | API |
 | Lichess | API |
 | HackerNews | API |
-| Dev.to | API |
 | Duolingo | API |
-| Keybase | API |
-| TryHackMe | API |
-| Bitbucket | API |
+| Dev.to | API |
 | npm | API |
 | Gravatar | API |
+| Keybase | API |
+| Bitbucket | API |
+| TryHackMe | API |
 | PyPI | API |
-| ProductHunt | HTTP |
+| Mastodon | API |
+| Roblox | API (Users + Friends + Inventory) |
 | Pastebin | HTTP |
 | Codecademy | HTTP |
 | Linktree | HTTP |
+| Steam | HTTP |
+| Medium | HTTP |
+| Replit | HTTP |
+| About.me | HTTP |
+| VK | HTTP |
+| HackerOne | HTTP |
+| Behance | HTTP |
+| Dribbble | HTTP |
 | Instagram | Manual |
 | TikTok | Manual |
 | Twitter / X | Manual |
 | YouTube | Manual |
 | Twitch | Manual |
-| Steam | Manual |
-| Telegram | Manual |
 | Spotify | Manual |
 | Snapchat | Manual |
-| Medium | Manual |
-| Pinterest | Manual |
-| Roblox | Manual |
-| Replit | Manual |
+| LinkedIn | Manual |
 
 ---
 
